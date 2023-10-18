@@ -42,7 +42,15 @@ void Lab2::Init()
     {
         vector<VertexFormat> vertices
         {
-            VertexFormat(glm::vec3(-1, -1,  1), glm::vec3(0, 1, 1), glm::vec3(0.2, 0.8, 0.6)),
+            //VertexFormat(glm::vec3(-1, -1, 1), glm::vec3(0, 1, 1), glm::vec3(0.2, 0.8, 0.6)),
+                VertexFormat(glm::vec3(0, 0, 1), glm::vec3(0, 10, 10)),
+                VertexFormat(glm::vec3(1, 0, 1), glm::vec3(0, 20, 20)),
+                VertexFormat(glm::vec3(0, 1, 1), glm::vec3(0, 30, 30)),
+                VertexFormat(glm::vec3(1, 1, 1), glm::vec3(0, 40, 40)),
+                VertexFormat(glm::vec3(0, 0, 0), glm::vec3(0, 50, 50)),
+                VertexFormat(glm::vec3(1, 0, 0), glm::vec3(0, 60, 60)),
+                VertexFormat(glm::vec3(0, 1, 0), glm::vec3(0, 70, 70)),
+                VertexFormat(glm::vec3(1, 1,  0), glm::vec3(0, 80, 80)),
             // TODO(student): Complete the vertices data for the cube mesh
 
         };
@@ -52,7 +60,16 @@ void Lab2::Init()
             0, 1, 2,    // indices for first triangle
             1, 3, 2,    // indices for second triangle
             // TODO(student): Complete indices data for the cube mesh
-
+            2, 3, 7,
+            2, 7, 6,
+            1, 7, 3,
+            1, 5, 7,
+            6, 7, 4,
+            7, 5, 4,
+            0, 4, 1,
+            1, 4, 5,
+            2, 6, 4,
+            0, 2, 4
         };
 
         meshes["cube_A"] = new Mesh("generated cube 1");
@@ -62,31 +79,127 @@ void Lab2::Init()
         CreateMesh("cube_B", vertices, indices);
     }
 
+    {
+        vector<VertexFormat> t_vertices
+        {
+                VertexFormat(glm::vec3(-2.73f, 0, -2.73f), glm::vec3(0, 0, 1)), // A
+                VertexFormat(glm::vec3(0, 0, -2.f), glm::vec3(0, 0, 1)), // B
+                VertexFormat(glm::vec3(-2.f, 0, 0), glm::vec3(0, 0, 1)), // C
+                VertexFormat(glm::vec3(-1.5f, 2.73f, -1.5f), glm::vec3(0, 0, 1)), // D
+
+        };
+
+        vector<unsigned int> t_indices =
+        {
+            0, 1, 2,
+            3, 1, 0,
+            2, 3, 0,
+            1, 3, 2,
+        };
+
+        meshes["tetrahedron"] = new Mesh("generated tetrahedron");
+        meshes["tetrahedron"]->InitFromData(t_vertices, t_indices);
+
+        // Actually create the mesh from the data
+        CreateMesh("tetrahedron", t_vertices, t_indices);
+    }
+
     // TODO(student): Create a tetrahedron mesh. You can create it with
     // only 4 vertices, or you can choose the harder route and create it
     // with 12 vertices. Think about it, why would you want that, and how
     // would you do it? After all, a tetrahedron has only 4 vertices
     // by definition!
 
+
+    {
+        vector<VertexFormat> s_vertices
+        {
+            VertexFormat(glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)),
+                VertexFormat(glm::vec3(0, 1, 0), glm::vec3(0, 0, 1)),
+                VertexFormat(glm::vec3(0, 1, 1), glm::vec3(0, 0, 1)),
+                VertexFormat(glm::vec3(0, 0, 1), glm::vec3(0, 0, 1)),
+
+        };
+
+        vector<unsigned int> s_indices =
+        {
+            0, 3, 1,
+            1, 2, 3
+        };
+
+        meshes["square"] = new Mesh("generated square");
+        meshes["square"]->InitFromData(s_vertices, s_indices);
+
+        // Actually create the mesh from the data
+        CreateMesh("square", s_vertices, s_indices);
+    }
     // TODO(student): Create a square using two triangles with
     // opposing vertex orientations.
 
+
+    // BONUS
+    {
+        vector<VertexFormat> t_vertices
+        {
+                // 1
+                VertexFormat(glm::vec3(-2.73f, 0, -2.73f), glm::vec3(0, 0, 1)), // A
+                VertexFormat(glm::vec3(0, 0, -2.f), glm::vec3(0, 0, 1)), // B
+                VertexFormat(glm::vec3(-1.5f, 2.73f, -1.5f), glm::vec3(0, 0, 1)), // D
+
+                // 2
+                VertexFormat(glm::vec3(-2.73f, 0, -2.73f), glm::vec3(0, 1, 0)), // A
+                VertexFormat(glm::vec3(-2.f, 0, 0), glm::vec3(0, 1, 0)), // C
+                VertexFormat(glm::vec3(-1.5f, 2.73f, -1.5f), glm::vec3(0, 1, 0)), // D
+
+                // 3
+                VertexFormat(glm::vec3(0, 0, -2.f), glm::vec3(1, 0, 1)), // B
+                VertexFormat(glm::vec3(-2.f, 0, 0), glm::vec3(1, 0, 1)), // C
+                VertexFormat(glm::vec3(-1.5f, 2.73f, -1.5f), glm::vec3(1, 0, 1)), // D
+
+                // 4
+                VertexFormat(glm::vec3(-2.73f, 0, -2.73f), glm::vec3(1, 0, 0)), // A
+                VertexFormat(glm::vec3(0, 0, -2.f), glm::vec3(1, 0, 0)), // B
+                VertexFormat(glm::vec3(-2.f, 0, 0), glm::vec3(1, 0, 0)), // C
+        };
+
+        vector<unsigned int> t_indices =
+        {
+            0, 1, 2,
+            3, 4, 5,
+            6, 7, 8,
+            9, 10, 11,
+        };
+
+        meshes["tetrahedron2"] = new Mesh("generated tetrahedron2");
+        meshes["tetrahedron2"]->InitFromData(t_vertices, t_indices);
+
+        // Actually create the mesh from the data
+        CreateMesh("tetrahedron2", t_vertices, t_indices);
+    }
 }
 
 
 void Lab2::CreateMesh(const char *name, const std::vector<VertexFormat> &vertices, const std::vector<unsigned int> &indices)
 {
     unsigned int VAO = 0;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
     // TODO(student): Create the VAO and bind it
 
     unsigned int VBO = 0;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // TODO(student): Create the VBO and bind it
 
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
     // TODO(student): Send vertices data into the VBO buffer
 
     unsigned int IBO = 0;
+    glGenBuffers(1, &IBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     // TODO(student): Create the IBO and bind it
 
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_STATIC_DRAW);
     // TODO(student): Send indices data into the IBO buffer
 
     // ========================================================================
@@ -114,6 +227,7 @@ void Lab2::CreateMesh(const char *name, const std::vector<VertexFormat> &vertice
     // ========================================================================
 
     // TODO(student): Unbind the VAO
+    glBindVertexArray(0);
 
     // Check for OpenGL errors
     if (GetOpenGLError() == GL_INVALID_OPERATION)
@@ -148,8 +262,12 @@ void Lab2::Update(float deltaTimeSeconds)
     glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 
     // TODO(student): Enable face culling
+    glEnable(GL_CULL_FACE);
+    cullStatus = true;
 
     // TODO(student): Set face custom culling. Use the `cullFace` variable.
+    /*glCullFace(GL_BACK);
+    GL_STATUS = false;*/
 
     // Render an object using face normals for color
     RenderMesh(meshes["box"], shaders["VertexNormal"], glm::vec3(0, 0.5f, -1.5f), glm::vec3(0.75f));
@@ -158,13 +276,18 @@ void Lab2::Update(float deltaTimeSeconds)
     RenderMesh(meshes["cube_A"], shaders["VertexColor"], glm::vec3(-1.5f, 0.5f, 0), glm::vec3(0.25f));
 
     // TODO(student): Draw the mesh that was created with `CreateMesh()`
+    RenderMesh(meshes["cube_B"], shaders["VertexNormal"], glm::vec3(-3.0f, 0.5f, 0), glm::vec3(0.25f));
 
     // TODO(student): Draw the tetrahedron
+    RenderMesh(meshes["tetrahedron"], shaders["VertexNormal"], glm::vec3(-3.0f, 0.5f, -1.f), glm::vec3(0.25f));
+    RenderMesh(meshes["tetrahedron2"], shaders["VertexColor"], glm::vec3(-5.0f, 0.5f, -2.f), glm::vec3(0.25f));
 
     // TODO(student): Draw the square
+    RenderMesh(meshes["square"], shaders["VertexNormal"], glm::vec3(-4.0f, 0.5f, -2.f), glm::vec3(0.25f));
+
 
     // TODO(student): Disable face culling
-
+    glDisable(GL_CULL_FACE);
 }
 
 
@@ -204,6 +327,25 @@ void Lab2::OnKeyPress(int key, int mods)
         default:
             polygonMode = GL_LINE;
             break;
+        }
+    }
+    else if (key == GLFW_KEY_F2) {
+        if (GL_STATUS) {
+            GL_STATUS = false;
+            glCullFace(GL_BACK);
+        }
+        else {
+            GL_STATUS = true;
+            glCullFace(GL_FRONT);
+        }
+    } else if (key == GLFW_KEY_F4) {
+        if (cullStatus) {
+            cullStatus = false;
+            glDisable(GL_CULL_FACE);
+        }
+        else {
+            glEnable(GL_CULL_FACE);
+            cullStatus = true;
         }
     }
 }

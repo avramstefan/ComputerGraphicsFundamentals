@@ -34,5 +34,7 @@ namespace m1
      protected:
         GLenum cullFace;
         GLenum polygonMode;
+        bool GL_STATUS;
+        bool cullStatus;
     };
 }   // namespace m1
