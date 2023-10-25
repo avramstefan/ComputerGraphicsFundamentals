@@ -170,6 +170,39 @@ void Lab3_Vis2D::OnInputUpdate(float deltaTime, int mods)
 
     // TODO(student): Zoom in and zoom out logic window with Z and X
 
+
+    if (window->KeyHold(GLFW_KEY_W)) {
+        logicSpace.y -= deltaTime;
+    }
+    else if (window->KeyHold(GLFW_KEY_A)) {
+        logicSpace.x += deltaTime;
+    }
+    else if (window->KeyHold(GLFW_KEY_S)) {
+        logicSpace.y += deltaTime;
+    }
+    else if (window->KeyHold(GLFW_KEY_D)) {
+        logicSpace.x -= deltaTime;
+    }
+    else if (window->KeyHold(GLFW_KEY_X)) {
+        float zoom = deltaTime;
+
+        logicSpace.x -= deltaTime;
+        logicSpace.y -= deltaTime;
+
+        logicSpace.width += 2 * zoom;
+        logicSpace.height += 2 * zoom;
+    }
+    else if (window->KeyHold(GLFW_KEY_Z)) {
+        float zoom = deltaTime;
+
+        logicSpace.width -= 2 * zoom;
+        logicSpace.height -= 2 * zoom;
+
+        logicSpace.x += zoom;
+        logicSpace.y += zoom;
+
+    }
+
 }
 
 
